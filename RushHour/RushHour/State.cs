@@ -8,12 +8,18 @@ namespace RushHour
 {
     class State
     {
-        RushHourBoard _board;
-        State _parent;
+        RushHourBoard board;
+        State parent;
 
-            public State(RushHourBoard board, State parent){
-                _board = board;
-                _parent = parent;
-            }
+        public State(RushHourBoard board, State parent)
+        {
+            this.board = board;
+            this.parent = parent;
+        }
+
+        public RushHourBoard GetBoard()
+        {
+            return board;
+        }
     }
 }

@@ -80,6 +80,29 @@ namespace RushHour
             Console.ReadLine();
         }
 
+        //UNTESTED: Get the board (including vehicles) as a string.
+        public string GetBoardString()
+        {
+            List<char> boardCharList = new List<char>();
 
+            for (int i = 0; i < board.GetLength(0); i++)
+            {
+                for (int j = 0; j < board.GetLength(1); j++)
+                {
+                    boardCharList.Add('*');
+
+                    for (int k = 0; k < vehicles.Count; k++)
+                    {
+                        if (board[i, j].getX() == vehicles[k].getX() || board[i, j].getY() == vehicles[k].getY())
+                        {
+                            boardCharList.RemoveAt(boardCharList.Count - 1);
+                            boardCharList.Add('x');
+                        }
+                    }
+                }
+            }
+
+            return boardCharList.ToString();
+        }
     }
 }
