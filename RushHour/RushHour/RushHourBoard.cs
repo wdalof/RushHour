@@ -81,6 +81,7 @@ namespace RushHour
         }
 
         //UNTESTED: Get the board (including vehicles) as a string.
+        //This is used for comparing two boards.
         public string GetBoardString()
         {
             List<char> boardCharList = new List<char>();
@@ -96,7 +97,7 @@ namespace RushHour
                         if (board[i, j].getX() == vehicles[k].getX() || board[i, j].getY() == vehicles[k].getY())
                         {
                             boardCharList.RemoveAt(boardCharList.Count - 1);
-                            boardCharList.Add('x');
+                            boardCharList.Add(vehicles[k].getName());
                         }
                     }
                 }
