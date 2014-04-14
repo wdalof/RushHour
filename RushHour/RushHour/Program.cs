@@ -10,8 +10,12 @@ namespace RushHour
     {
         static void Main(string[] args)
         {
-            Car c = new Car(3, 4, 2, Car.Direction.HORIZONTAL);
+            Car c = new Car(3, 4, Vehicle.Direction.HORIZONTAL);
+
             RushHourBoard board = new RushHourBoard();
+
+            board.add(c);
+            board.printBoard();
         }
     }
 }
