@@ -61,6 +61,11 @@ namespace RushHour
             return length;
         }
 
+        public char getName()
+        {
+            return name;
+        }
+
     }
 }
 
