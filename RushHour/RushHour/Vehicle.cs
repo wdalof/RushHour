@@ -40,6 +40,7 @@ namespace RushHour
             this.name = c;
         }
 
+
         // get vehicle direction
         public Direction getDirection()
         {

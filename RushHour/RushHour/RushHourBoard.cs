@@ -12,8 +12,10 @@ namespace RushHour
         public static int size = 6;
         private int width;
         private int height;
-        Vehicle[,] board;
+        Object[,] board;
         List<Vehicle> vehicles =new List<Vehicle>();
+        Object goal;
+        string clashErrorMessage = "Vehicle clash";
 
         public RushHourBoard()
         {
@@ -24,14 +26,14 @@ namespace RushHour
 
         public void initBoard()
         {
-            board = new Vehicle[size, size];
+            board = new Object[size, size];
 
             //set all x and y values to null 
             for (int k = 0; k < board.GetLength(0); k++)
                 for (int l = 0; l < board.GetLength(1); l++)
                     board[k, l] = null;
-
-            this.setGoal(5,2);
+            //set the goal
+            this.setGoal(1,2);
         }
         // method for adding a vehicle to the board
         public void add(Vehicle v)
@@ -47,7 +49,8 @@ namespace RushHour
                         board[i, v.getY()] = v;
                     }
                     else
-                        Console.WriteLine("Vehicle clash");
+                        throw new CustomException(clashErrorMessage);
+
                 }
             }
             else if (v.getDirection() == Vehicle.Direction.VERTICAL)
@@ -59,51 +62,71 @@ namespace RushHour
                         board[v.getX(), i] = v;
                     }
                     else
-                        Console.WriteLine("Vehicle clash");
+                        throw new CustomException(clashErrorMessage);
                 }
             }
         }
-
+        // set the goal to a specified x / y location on the board
         public void setGoal(int x, int y)
         {
-            Object goal = new Object();
             // the goal is represented by a @.
-            board[x, y] = goal;
+            goal = '@';
+            // check if the goal location is free
+            if (board[x, y] == null)
+            {
+                board[x, y] = goal;
+            }
+            else
+                throw new CustomException("The goal position is already taken");
         }
 
-        //print rushhour board method
+        // get the goal object 
+        public Object getGoal()
+        {
+            return goal;
+        }
+
+        //print rushhour board method as a 6 x 6 matrix
         public void printBoard()
         {
-            for (int k = 0; k < board.GetLength(0); k++)
-                for (int l = 0; l < board.GetLength(1); l++)
-                    Console.WriteLine(board[k, l]);
+            int rowLength = board.GetLength(0);
+            int colLength = board.GetLength(1);
+
+            for (int i = 0; i < rowLength; i++)
+            {
+                for (int j = 0; j < colLength; j++)
+                {
+                    Console.Write(string.Format("{0} ", board[i, j]));
+                }
+                Console.Write(Environment.NewLine + Environment.NewLine);
+            }
             Console.ReadLine();
         }
 
         //UNTESTED: Get the board (including vehicles) as a string.
         //This is used for comparing two boards.
-        public string GetBoardString()
-        {
-            List<char> boardCharList = new List<char>();
+        //public string GetBoardString()
+        //{
+        //    List<char> boardCharList = new List<char>();
 
-            for (int i = 0; i < board.GetLength(0); i++)
-            {
-                for (int j = 0; j < board.GetLength(1); j++)
-                {
-                    boardCharList.Add('*');
+        //    for (int i = 0; i < board.GetLength(0); i++)
+        //    {
+        //        for (int j = 0; j < board.GetLength(1); j++)
+        //        {
+        //            boardCharList.Add('*');
 
-                    for (int k = 0; k < vehicles.Count; k++)
-                    {
-                        if (board[i, j].getX() == vehicles[k].getX() || board[i, j].getY() == vehicles[k].getY())
-                        {
-                            boardCharList.RemoveAt(boardCharList.Count - 1);
-                            boardCharList.Add(vehicles[k].getName());
-                        }
-                    }
-                }
-            }
+        //            for (int k = 0; k < vehicles.Count; k++)
+        //            {
+        //                if (board[i, j].getX() == vehicles[k].getX() || board[i, j].getY() == vehicles[k].getY())
+        //                {
+        //                    boardCharList.RemoveAt(boardCharList.Count - 1);
+        //                    boardCharList.Add(vehicles[k].getName());
+        //                }
+        //            }
+        //        }
+        //    }
 
-            return boardCharList.ToString();
-        }
+        //    return boardCharList.ToString();
+        //}
     }
 }

@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="BFSearch.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="RedCar.cs" />
+    <Compile Include="CustomException.cs" />
     <Compile Include="RushHourBoard.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
