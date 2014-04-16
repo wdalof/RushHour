@@ -103,30 +103,49 @@ namespace RushHour
             Console.ReadLine();
         }
 
-        //UNTESTED: Get the board (including vehicles) as a string.
+        //Get the board (including vehicles) as a string.
         //This is used for comparing two boards.
-        //public string GetBoardString()
-        //{
-        //    List<char> boardCharList = new List<char>();
+        public string GetBoardString()
+        {
+            //May replace this list with an array in the future.
+            List<char> boardCharList = new List<char>();
 
-        //    for (int i = 0; i < board.GetLength(0); i++)
-        //    {
-        //        for (int j = 0; j < board.GetLength(1); j++)
-        //        {
-        //            boardCharList.Add('*');
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    //Add character for empty slot.
+                    boardCharList.Add('*');
 
-        //            for (int k = 0; k < vehicles.Count; k++)
-        //            {
-        //                if (board[i, j].getX() == vehicles[k].getX() || board[i, j].getY() == vehicles[k].getY())
-        //                {
-        //                    boardCharList.RemoveAt(boardCharList.Count - 1);
-        //                    boardCharList.Add(vehicles[k].getName());
-        //                }
-        //            }
-        //        }
-        //    }
+                    if (board[i, j] is Car)
+                    {
+                        ////Add name to the board.
+                        //Car tempCar = (Car)board[i,j];
+                        //boardCharList.Add(tempCar.getName());
+                        //tempCar = null;
 
-        //    return boardCharList.ToString();
-        //}
+                        //If slot is Car, then remove added * and add Car sign (c).
+                        boardCharList.RemoveAt(boardCharList.Count - 1);
+                        boardCharList.Add('c');
+
+                    }
+                    if (board[i, j] is Truck)
+                    {
+                        //If slot is Truck, then remove added * and add Truck sign (t).
+                        boardCharList.RemoveAt(boardCharList.Count - 1);
+                        boardCharList.Add('t');
+
+                    }
+                    if (board[i, j] is RedCar)
+                    {
+                        //If slot is RedCar, then remove added * and add RedCar sign (t).
+                        boardCharList.RemoveAt(boardCharList.Count - 1);
+                        boardCharList.Add('r');
+
+                    }
+                }
+            }
+            return boardCharList.ToString();
+        }
     }
 }
