@@ -120,6 +120,59 @@ namespace RushHour
             Console.ReadLine();
         }
 
+        ////print rushhour board method as a 6 x 6 matrix
+        //public void printBoard()
+        //{
+        //    int rowLength = board.GetLength(0);
+        //    int colLength = board.GetLength(1);
+
+        //    for (int i = 0; i < rowLength; i++)
+        //    {
+        //        for (int j = 0; j < colLength; j++)
+        //        {
+        //            if ((board[i, j] is Car) || (board[i, j] is Truck) || (board[i, j] is RedCar))
+        //            {
+        //                //INCLOMPLETE CODE.
+        //                if (board[i, j] is Car)
+        //                {
+        //                    //SAME CODE IS ALSO NEEDED (I THINK) WHEN OBJECT IS A TRUCK AND CAR (BENEATH), (COPE/PASTE -> ADJUST TYPE/CHAR TO PRINT).
+
+        //                    //Print name of vehicle.
+        //                    //Create temponary object to get the name.
+        //                    Car tempCar = (Car)board[i, j];
+        //                    //Print the name.
+        //                    Console.WriteLine(tempCar.getName());
+        //                    //Set object to null for garbage collector (not sure if this is necessary but it looks good to me, seen this is example from concurrent programming).
+        //                    tempCar = null;
+
+        //                    //If slot is Car, then print Car sign (c).
+        //                    //THIS IS FOR IF A VEHICLE DOES NOT HAVE A NAME. NEED IF STATEMENT, IT IS OR THIS METHOD OR THE METHOD ABOVE.
+        //                    Console.Write("c");
+
+        //                }
+        //                if (board[i, j] is Truck)
+        //                {
+        //                    //If slot is Truck, then print Truck sign (t).
+        //                    Console.Write("t");
+
+        //                }
+        //                if (board[i, j] is RedCar)
+        //                {
+        //                    //If slot is RedCar, then print RedCar sign (t).
+        //                    Console.Write("r");
+        //                }
+        //            }
+        //            else
+        //            {
+        //                Console.Write(".");
+        //            }
+        //        }
+        //        //Print a new line when going to next row.
+        //        Console.WriteLine();
+        //    }
+        //    Console.ReadLine();
+        //}
+
         //Get the board (including vehicles) as a string.
         //This is used for comparing two boards.
         public string GetBoardString()
