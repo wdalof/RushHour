@@ -146,7 +146,7 @@ namespace RushHour
         //                    tempCar = null;
 
         //                    //If slot is Car, then print Car sign (c).
-        //                    //THIS IS FOR IF A VEHICLE DOES NOT HAVE A NAME. NEED IF STATEMENT, IT IS OR THIS METHOD OR THE METHOD ABOVE.
+        //                    //THIS IS FOR IF A VEHICLE DOES NOT HAVE A NAME. NEED IF STATEMENT WITH, IT IS THIS (PRINT DEFAULT SIGN) OR THE CODE ABOVE (PRINT VEHICLE NAME).
         //                    Console.Write("c");
 
         //                }
