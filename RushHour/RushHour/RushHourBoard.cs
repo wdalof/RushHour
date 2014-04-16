@@ -16,6 +16,8 @@ namespace RushHour
         List<Vehicle> vehicles =new List<Vehicle>();
         Object goal;
         string clashErrorMessage = "Vehicle clash";
+        int goalXposition;
+        int goalYposition;
 
         public RushHourBoard()
         {
@@ -67,14 +69,16 @@ namespace RushHour
             }
         }
         // set the goal to a specified x / y location on the board
-        public void setGoal(int x, int y)
-        {
+        public void setGoal(int x, int y){
+        
+            goalXposition=x;
+            goalYposition = y;
             // the goal is represented by a @.
             goal = '@';
             // check if the goal location is free
-            if (board[x, y] == null)
+            if (board[goalXposition, goalXposition] == null)
             {
-                board[x, y] = goal;
+                board[goalXposition,goalYposition] = goal;
             }
             else
                 throw new CustomException("The goal position is already taken");
@@ -94,8 +98,21 @@ namespace RushHour
 
             for (int i = 0; i < rowLength; i++)
             {
+                {
+                    Console.Write(".");
+                }
                 for (int j = 0; j < colLength; j++)
                 {
+                    // WORKS
+                    while (board[i, j] == null)
+                    {
+                        board[i, j] = '.';
+                    }
+                    // DOESN'T WORK YET
+                    //while (board[i, j] != null)
+                    //{
+                    //    board[i, j] = Vehicle.vehicle_name;
+                    //}
                     Console.Write(string.Format("{0} ", board[i, j]));
                 }
                 Console.Write(Environment.NewLine + Environment.NewLine);
