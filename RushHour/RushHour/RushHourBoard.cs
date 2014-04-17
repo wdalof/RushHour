@@ -90,6 +90,86 @@ namespace RushHour
             return goal;
         }
 
+        //check if a vehicle can move up
+        public bool moveUp(Vehicle v)
+        {
+            try
+            {
+                if (board[v.getX(), v.getY() + 1] == null)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException OutOfRangeException)
+            {
+                //Console.WriteLine(OutOfRangeException);
+                return false;
+            }
+        }
+
+        // check if  a vehicle can move down
+        public bool moveDown(Vehicle v)
+        {
+            try
+            {
+
+                if (board[v.getX(), v.getY() - 1] == null)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException OutOfRangeException)
+            {
+                //Console.WriteLine(OutOfRangeException);
+                return false;
+            }
+          
+        }
+
+        // check if a vehicle can move left
+        public bool moveLeft(Vehicle v)
+        {
+            try
+            {
+                if (board[v.getX() - 1, v.getY()] == null)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException OutOfRangeException)
+            {
+                //Console.WriteLine(OutOfRangeException);
+                return false;
+            }
+
+        }
+
+        //check if a vehicle can move right
+        public bool moveRight(Vehicle v)
+        {
+            try
+            {
+                if (board[v.getX() + 1, v.getY()] == null)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (IndexOutOfRangeException OutOfRangeException)
+            {
+                //Console.WriteLine(OutOfRangeException);
+                return false;
+            }
+        }
+
+
         //print rushhour board method as a 6 x 6 matrix
         public void printBoard()
         {
@@ -111,7 +191,7 @@ namespace RushHour
                     // DOESN'T WORK YET
                     while (board[i, j] != null)
                     {
-                        board[i, j] = "test";
+                        board[i, j] = 'c';
                     }
                     Console.Write(string.Format("{0} ", board[i, j]));
                 }
