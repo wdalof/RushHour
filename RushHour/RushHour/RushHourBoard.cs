@@ -109,10 +109,10 @@ namespace RushHour
                         board[i, j] = '.';
                     }
                     // DOESN'T WORK YET
-                    //while (board[i, j] != null)
-                    //{
-                    //    board[i, j] = Vehicle.vehicle_name;
-                    //}
+                    while (board[i, j] != null)
+                    {
+                        board[i, j] = "test";
+                    }
                     Console.Write(string.Format("{0} ", board[i, j]));
                 }
                 Console.Write(Environment.NewLine + Environment.NewLine);
