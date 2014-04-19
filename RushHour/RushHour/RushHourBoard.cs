@@ -254,47 +254,43 @@ namespace RushHour
         //    Console.ReadLine();
         //}
 
-        public string GetBoardString()
+        //Get the board (including vehicles) as a string.
+        //This is used for comparing two boards.
+        public string getBoardString()
         {
-            //May replace this list with an array in the future.
-            List<char> boardCharList = new List<char>();
+            char[] boardCharArray = new char[size * size];
 
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    //Add character for empty slot.
-                    boardCharList.Add('*');
+                    //Add '.' if there is no vehicle on current position.
+                    boardCharArray[j + (i * size)] = '.';
 
                     if (board[i, j] is Car)
                     {
-                        ////Add name to the board.
+                        ////Add name of the vehicle to the board.
                         //Car tempCar = (Car)board[i,j];
                         //boardCharList.Add(tempCar.getName());
                         //tempCar = null;
 
-                        //If slot is Car, then remove added * and add Car sign (c).
-                        boardCharList.RemoveAt(boardCharList.Count - 1);
-                        boardCharList.Add('c');
-
+                        //Add 'c' if there is a car on current position.
+                        boardCharArray[j + (i * size)] = 'c';
                     }
                     if (board[i, j] is Truck)
                     {
-                        //If slot is Truck, then remove added * and add Truck sign (t).
-                        boardCharList.RemoveAt(boardCharList.Count - 1);
-                        boardCharList.Add('t');
-
+                        //Add 't' if there is a truck on current position.
+                        boardCharArray[j + (i * size)] = 't';
                     }
                     if (board[i, j] is RedCar)
                     {
-                        //If slot is RedCar, then remove added * and add RedCar sign (t).
-                        boardCharList.RemoveAt(boardCharList.Count - 1);
-                        boardCharList.Add('r');
-
+                        //Add 'r' if the red car is on current position.
+                        boardCharArray[j + (i * size)] = 'r';
                     }
                 }
             }
-            return boardCharList.ToString();
+
+            return new string(boardCharArray);
         }
     }
 }

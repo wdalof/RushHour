@@ -45,7 +45,7 @@ namespace RushHour
             for (int i = 0; i < list.Count; i++)
             {
                 //If same board is found, return true.
-                if (state.GetBoard().GetBoardString() == list[i].GetBoard().GetBoardString())
+                if (state.GetBoard().getBoardString() == list[i].GetBoard().getBoardString())
                 {
                     return true;
                 }
