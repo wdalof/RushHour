@@ -169,8 +169,8 @@ namespace RushHour
             }
         }
 
-
         //print rushhour board method as a 6 x 6 matrix
+
         public void printBoard()
         {
             int rowLength = board.GetLength(0);
@@ -178,29 +178,54 @@ namespace RushHour
 
             for (int i = 0; i < rowLength; i++)
             {
-                {
-                    Console.Write(".");
-                }
                 for (int j = 0; j < colLength; j++)
                 {
-                    // WORKS
-                    while (board[i, j] == null)
+                    //Check if the object inside is a car/truck or the red car.
+                    if ((board[i, j] is Car) || (board[i, j] is Truck) || (board[i, j] is RedCar))
                     {
-                        board[i, j] = '.';
+                        if (board[i, j] is RedCar)
+                        {
+                            //Create temponary object to get the name.
+                            RedCar tempRedCar = (RedCar)board[i, j];
+                            //Print the name (on the SAME line, Console.Write vs Console.WriteLine).
+                            Console.Write(tempRedCar.getName());
+                            //Set object to null for garbage collector.
+                            tempRedCar = null;
+
+                            //When printing is done, continue with for loop (skip the if statements below).
+                            continue;
+                        }
+                        if (board[i, j] is Car)
+                        {
+                            Car tempCar = (Car)board[i, j];
+                            Console.Write(tempCar.getName());
+                            tempCar = null;
+
+                            continue;
+                        }
+                        if (board[i, j] is Truck)
+                        {
+                            Truck tempTruck = (Truck)board[i, j];
+                            Console.Write(tempTruck.getName());
+                            tempTruck = null;
+
+                            continue;
+                        }
                     }
-                    // DOESN'T WORK YET
-                    while (board[i, j] != null)
+                    else
                     {
-                        board[i, j] = 'c';
+                        //When there is no car/truck or red car, print "." (on the same line, Console.Write vs Console.WriteLine).
+                        Console.Write(".");
                     }
-                    Console.Write(string.Format("{0} ", board[i, j]));
                 }
-                Console.Write(Environment.NewLine + Environment.NewLine);
+
+                //Print a new line when going to next row.
+                Console.WriteLine();
             }
             Console.ReadLine();
         }
 
-        ////print rushhour board method as a 6 x 6 matrix
+        //print rushhour board method as a 6 x 6 matrix
         //public void printBoard()
         //{
         //    int rowLength = board.GetLength(0);
@@ -208,94 +233,126 @@ namespace RushHour
 
         //    for (int i = 0; i < rowLength; i++)
         //    {
+        //        {
+        //            Console.Write(".");
+        //        }
         //        for (int j = 0; j < colLength; j++)
         //        {
-        //            if ((board[i, j] is Car) || (board[i, j] is Truck) || (board[i, j] is RedCar))
+<<<<<<< HEAD
+        //             WORKS
+=======
+>>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
+        //            // WORKS
+        //            while (board[i, j] == null)
         //            {
-        //                //INCLOMPLETE CODE.
-        //                if (board[i, j] is Car)
-        //                {
-        //                    //SAME CODE IS ALSO NEEDED (I THINK) WHEN OBJECT IS A TRUCK AND CAR (BENEATH), (COPE/PASTE -> ADJUST TYPE/CHAR TO PRINT).
-
-        //                    //Print name of vehicle.
-        //                    //Create temponary object to get the name.
-        //                    Car tempCar = (Car)board[i, j];
-        //                    //Print the name.
-        //                    Console.WriteLine(tempCar.getName());
-        //                    //Set object to null for garbage collector (not sure if this is necessary but it looks good to me, seen this is example from concurrent programming).
-        //                    tempCar = null;
-
-        //                    //If slot is Car, then print Car sign (c).
-        //                    //THIS IS FOR IF A VEHICLE DOES NOT HAVE A NAME. NEED IF STATEMENT WITH, IT IS THIS (PRINT DEFAULT SIGN) OR THE CODE ABOVE (PRINT VEHICLE NAME).
-        //                    Console.Write("c");
-
-        //                }
-        //                if (board[i, j] is Truck)
-        //                {
-        //                    //If slot is Truck, then print Truck sign (t).
-        //                    Console.Write("t");
-
-        //                }
-        //                if (board[i, j] is RedCar)
-        //                {
-        //                    //If slot is RedCar, then print RedCar sign (t).
-        //                    Console.Write("r");
-        //                }
+        //                board[i, j] = '.';
         //            }
-        //            else
+<<<<<<< HEAD
+        //             DOESN'T WORK YET
+=======
+>>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
+        //            // DOESN'T WORK YET
+        //            while (board[i, j] != null)
         //            {
-        //                Console.Write(".");
+        //                board[i, j] = 'c';
         //            }
+        //            Console.Write(string.Format("{0} ", board[i, j]));
         //        }
-        //        //Print a new line when going to next row.
-        //        Console.WriteLine();
+        //        Console.Write(Environment.NewLine + Environment.NewLine);
         //    }
         //    Console.ReadLine();
         //}
 
+        ////print rushhour board method as a 6 x 6 matrix
+        public void printBoard()
+        {
+            int rowLength = board.GetLength(0);
+            int colLength = board.GetLength(1);
+
+            for (int i = 0; i < rowLength; i++)
+            {
+                for (int j = 0; j < colLength; j++)
+                {
+                    if ((board[i, j] is Car) || (board[i, j] is Truck) || (board[i, j] is RedCar))
+                    {
+                        //INCLOMPLETE CODE.
+                        if (board[i, j] is Car)
+                        {
+                            //SAME CODE IS ALSO NEEDED (I THINK) WHEN OBJECT IS A TRUCK AND CAR (BENEATH), (COPE/PASTE -> ADJUST TYPE/CHAR TO PRINT).
+
+                            //Print name of vehicle.
+                            //Create temponary object to get the name.
+                            Car tempCar = (Car)board[i, j];
+                            //Print the name.
+                            Console.WriteLine(tempCar.getName());
+                            //Set object to null for garbage collector (not sure if this is necessary but it looks good to me, seen this is example from concurrent programming).
+                            tempCar = null;
+
+                            //If slot is Car, then print Car sign (c).
+                            //THIS IS FOR IF A VEHICLE DOES NOT HAVE A NAME. NEED IF STATEMENT WITH, IT IS THIS (PRINT DEFAULT SIGN) OR THE CODE ABOVE (PRINT VEHICLE NAME).
+                            Console.Write("c");
+
+                        }
+                        if (board[i, j] is Truck)
+                        {
+                            //If slot is Truck, then print Truck sign (t).
+                            Console.Write("t");
+
+                        }
+                        if (board[i, j] is RedCar)
+                        {
+                            //If slot is RedCar, then print RedCar sign (t).
+                            Console.Write("r");
+                        }
+                    }
+                    else
+                    {
+                        Console.Write(".");
+                    }
+                }
+                //Print a new line when going to next row.
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+        }
+
         //Get the board (including vehicles) as a string.
         //This is used for comparing two boards.
-        public string GetBoardString()
+        public string getBoardString()
         {
-            //May replace this list with an array in the future.
-            List<char> boardCharList = new List<char>();
+            char[] boardCharArray = new char[size * size];
 
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    //Add character for empty slot.
-                    boardCharList.Add('*');
+                    //Add '.' if there is no vehicle on current position.
+                    boardCharArray[j + (i * size)] = '.';
 
                     if (board[i, j] is Car)
                     {
-                        ////Add name to the board.
+                        ////Add name of the vehicle to the board.
                         //Car tempCar = (Car)board[i,j];
                         //boardCharList.Add(tempCar.getName());
                         //tempCar = null;
 
-                        //If slot is Car, then remove added * and add Car sign (c).
-                        boardCharList.RemoveAt(boardCharList.Count - 1);
-                        boardCharList.Add('c');
-
+                        //Add 'c' if there is a car on current position.
+                        boardCharArray[j + (i * size)] = 'c';
                     }
                     if (board[i, j] is Truck)
                     {
-                        //If slot is Truck, then remove added * and add Truck sign (t).
-                        boardCharList.RemoveAt(boardCharList.Count - 1);
-                        boardCharList.Add('t');
-
+                        //Add 't' if there is a truck on current position.
+                        boardCharArray[j + (i * size)] = 't';
                     }
                     if (board[i, j] is RedCar)
                     {
-                        //If slot is RedCar, then remove added * and add RedCar sign (t).
-                        boardCharList.RemoveAt(boardCharList.Count - 1);
-                        boardCharList.Add('r');
-
+                        //Add 'r' if the red car is on current position.
+                        boardCharArray[j + (i * size)] = 'r';
                     }
                 }
             }
-            return boardCharList.ToString();
+
+            return new string(boardCharArray);
         }
     }
 }
