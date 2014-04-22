@@ -238,25 +238,14 @@ namespace RushHour
         //        }
         //        for (int j = 0; j < colLength; j++)
         //        {
-<<<<<<< HEAD
-<<<<<<< HEAD
         //             WORKS
-=======
->>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
-=======
->>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
+
         //            // WORKS
         //            while (board[i, j] == null)
         //            {
         //                board[i, j] = '.';
         //            }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        //             DOESN'T WORK YET
-=======
->>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
-=======
->>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
+        //             DOESN'T WORK 
         //            // DOESN'T WORK YET
         //            while (board[i, j] != null)
         //            {
