@@ -239,7 +239,10 @@ namespace RushHour
         //        for (int j = 0; j < colLength; j++)
         //        {
 <<<<<<< HEAD
+<<<<<<< HEAD
         //             WORKS
+=======
+>>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
 =======
 >>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
         //            // WORKS
@@ -248,7 +251,10 @@ namespace RushHour
         //                board[i, j] = '.';
         //            }
 <<<<<<< HEAD
+<<<<<<< HEAD
         //             DOESN'T WORK YET
+=======
+>>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
 =======
 >>>>>>> 2ffb40103d5ca9e769828a44637d5417653eab81
         //            // DOESN'T WORK YET
