@@ -238,14 +238,11 @@ namespace RushHour
         //        }
         //        for (int j = 0; j < colLength; j++)
         //        {
-        //             WORKS
-
         //            // WORKS
         //            while (board[i, j] == null)
         //            {
         //                board[i, j] = '.';
         //            }
-        //             DOESN'T WORK 
         //            // DOESN'T WORK YET
         //            while (board[i, j] != null)
         //            {
@@ -258,7 +255,10 @@ namespace RushHour
         //    Console.ReadLine();
         //}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9592491c8529f9620b0cef53b9ba35eaaad52fb9
         //Get the board (including vehicles) as a string.
         //This is used for comparing two boards.
         public string getBoardString()
