@@ -12,5 +12,7 @@ namespace RushHour
 
         public RedCar(int x, int y, Direction dir, char c) : base (x, y, dir, c) {}
 
+
+
     }
 }
