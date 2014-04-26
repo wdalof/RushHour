@@ -13,7 +13,7 @@ namespace RushHour
         private int width;
         private int height;
         Object[,] board;
-        List<Vehicle> vehicles =new List<Vehicle>();
+        List<Vehicle> vehicles = new List<Vehicle>();
         Object goal;
         string clashErrorMessage = "Vehicle clash";
         int goalXposition;
@@ -35,7 +35,7 @@ namespace RushHour
                 for (int l = 0; l < board.GetLength(1); l++)
                     board[k, l] = null;
             //set the goal
-            this.setGoal(1,2);
+            this.setGoal(1, 2);
         }
         // method for adding a vehicle to the board
         public void add(Vehicle v)
@@ -68,17 +68,19 @@ namespace RushHour
                 }
             }
         }
+
         // set the goal to a specified x / y location on the board
-        public void setGoal(int x, int y){
-        
-            goalXposition=x;
+        public void setGoal(int x, int y)
+        {
+
+            goalXposition = x;
             goalYposition = y;
             // the goal is represented by a @.
             goal = '@';
             // check if the goal location is free
             if (board[goalXposition, goalXposition] == null)
             {
-                board[goalXposition,goalYposition] = goal;
+                board[goalXposition, goalYposition] = goal;
             }
             else
                 throw new CustomException("The goal position is already taken");
@@ -88,6 +90,60 @@ namespace RushHour
         public Object getGoal()
         {
             return goal;
+        }
+
+        // move a vehicle
+        public void move(Vehicle v, int moveDirection)
+        {
+            // 1 = move one up/right
+            // -1 = move one down/left
+            if (v.getDirection() == Vehicle.Direction.HORIZONTAL)
+            {
+                // Check what direction to move.
+                if (moveDirection == 1)
+                {
+                    // Move the vehicle.
+                    v.setX(v.getX() + 1);
+
+                    // Set remaining position to null.
+                    board[v.getX() - 1, v.getY()] = null;
+                }
+                if (moveDirection == -1)
+                {
+                    // Move the vehicle and set remaining position to null.
+                    v.setX(v.getX() - 1);
+                    board[v.getX() + v.getLength(), v.getY()] = null;
+                }
+
+                // Apply changes to board.
+                for (int i = v.getX(); i < (v.getX() + v.getLength()); i++)
+                {
+                    board[i, v.getY()] = v;
+                }
+            }
+
+            if (v.getDirection() == Vehicle.Direction.VERTICAL)
+            {
+                // Check what direction to move.
+                if (moveDirection == 1)
+                {
+                    // Move the vehicle and set remaining position to null.
+                    v.setY(v.getY() + 1);
+                    board[v.getX(), v.getY() - 1] = null;
+                }
+                if (moveDirection == -1)
+                {
+                    // Move the vehicle and set remaining position to null.
+                    v.setY(v.getY() - 1);
+                    board[v.getX(), (v.getY() + v.getLength())] = null;
+                }
+
+                // Apply changes to board.
+                for (int i = v.getY(); i < (v.getY() + v.getLength()); i++)
+                {
+                    board[v.getX(), i] = v;
+                }
+            }
         }
 
         //check if a vehicle can move up
@@ -127,7 +183,7 @@ namespace RushHour
                 //Console.WriteLine(OutOfRangeException);
                 return false;
             }
-          
+
         }
 
         // check if a vehicle can move left
@@ -170,7 +226,6 @@ namespace RushHour
         }
 
         //print rushhour board method as a 6 x 6 matrix
-
         public void printBoard()
         {
             int rowLength = board.GetLength(0);

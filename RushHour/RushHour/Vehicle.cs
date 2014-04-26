@@ -39,15 +39,19 @@ namespace RushHour
             this.direction = dir;
             this.name = c;
         }
-        // vehicle move metod
-        public void move(int length)
-        {
-            if (direction == Direction.HORIZONTAL)
-                setX(length);
-            else
-                setY(length);
-        }
-       
+        //// vehicle move metod
+        //public void move(int length)
+        //{
+        //    if (direction == Direction.HORIZONTAL)
+        //    {
+        //        setX(length);
+        //    }
+        //    else
+        //    {
+        //        setY(length);
+        //    }
+        //}
+
         // get vehicle direction
         public Direction getDirection()
         {
@@ -63,7 +67,7 @@ namespace RushHour
         {
             return y;
         }
-         
+
         //set the x pos of the vehicle
         public void setX(int x)
         {
@@ -85,8 +89,6 @@ namespace RushHour
         {
             return name;
         }
-
-      
     }
 }
 
