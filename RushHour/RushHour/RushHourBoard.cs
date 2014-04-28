@@ -349,5 +349,11 @@ namespace RushHour
 
             return new string(boardCharArray);
         }
+
+        // Get the list of vehicles.
+        public List<Vehicle> getVehicleList()
+        {
+            return this.vehicles;
+        }
     }
 }
