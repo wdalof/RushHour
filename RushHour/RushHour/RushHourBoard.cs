@@ -35,7 +35,7 @@ namespace RushHour
                 for (int l = 0; l < board.GetLength(1); l++)
                     board[k, l] = null;
             //set the goal
-            this.setGoal(1, 2);
+            this.setGoal(3, 5);
         }
         // method for adding a vehicle to the board
         public void add(Vehicle v)

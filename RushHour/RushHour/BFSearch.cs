@@ -9,12 +9,12 @@ namespace RushHour
     class BFSearch
     {
         // Keep track of the states that are already visited.
-        public List<State> visitedStates = new List<State>();
+        private List<State> visitedStates = new List<State>();
 
         // List of states that have to be examined.
-        public List<State> stateQueue = new List<State>();
+        private List<State> stateQueue = new List<State>();
 
-        public RushHourBoard initialBoard;
+        private RushHourBoard initialBoard;
 
         public BFSearch(RushHourBoard initialBoard)
         {
@@ -48,6 +48,7 @@ namespace RushHour
                             // If vehicle can move, clone the state and move the vehicle.
                             State clone = cloneState(currentState.GetBoard(), currentState);
                             clone.GetBoard().move(vehicle, -1);
+                            clone.GetBoard().printBoard();
 
                             stateQueue.Add(clone);
                         }
@@ -55,6 +56,7 @@ namespace RushHour
                         {
                             State clone = cloneState(currentState.GetBoard(), currentState);
                             clone.GetBoard().move(vehicle, 1);
+                            clone.GetBoard().printBoard();
 
                             stateQueue.Add(clone);
                         }
@@ -65,6 +67,7 @@ namespace RushHour
                         {
                             State clone = cloneState(currentState.GetBoard(), currentState);
                             clone.GetBoard().move(vehicle, -1);
+                            clone.GetBoard().printBoard();
 
                             stateQueue.Add(clone);
                         }
@@ -72,6 +75,7 @@ namespace RushHour
                         {
                             State clone = cloneState(currentState.GetBoard(), currentState);
                             clone.GetBoard().move(vehicle, 1);
+                            clone.GetBoard().printBoard();
 
                             stateQueue.Add(clone);
                         }
@@ -80,6 +84,15 @@ namespace RushHour
 
                 // Add current (processed) state to the list.
                 visitedStates.Add(currentState);
+
+                // Check if current state is solution (has red car arrived on exit?).
+                // SUBJECT TO CHANGE.
+                if (currentState.GetBoard().getBoardString()[23] == 'r')
+                {
+                    Console.WriteLine("Done. Goal reached.");
+                    currentState.GetBoard().printBoard();
+                    break;
+                }
             }
         }
 
