@@ -103,16 +103,16 @@ namespace RushHour
                 if (moveDirection == 1)
                 {
                     // Move the vehicle.
-                    v.setX(v.getX() + 1);
+                    v.setX(v.getX() - 1);
 
                     // Set remaining position to null.
-                    board[v.getX() - 1, v.getY()] = null;
+                    board[v.getX() + v.getLength(), v.getY()] = null;
                 }
                 if (moveDirection == -1)
                 {
                     // Move the vehicle and set remaining position to null.
-                    v.setX(v.getX() - 1);
-                    board[v.getX() + v.getLength(), v.getY()] = null;
+                    v.setX(v.getX() + 1);
+                    board[v.getX() - 1, v.getY()] = null;
                 }
 
                 // Apply changes to board.
