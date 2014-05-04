@@ -23,7 +23,7 @@ namespace RushHour
             Console.WriteLine("Initial board:");
             board.printBoard();
 
-            Console.WriteLine("Solution:");
+            Console.Write("Solution:");
             BFSearch bfSearch = new BFSearch(board);
             bfSearch.solve();
 

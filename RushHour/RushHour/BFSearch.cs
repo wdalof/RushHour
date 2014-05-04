@@ -87,7 +87,8 @@ namespace RushHour
 
                 // Check if current state is solution (has red car arrived on exit?).
                 // SUBJECT TO CHANGE.
-                if (currentState.GetBoard().getBoardString()[23] == 'r')
+                //if (currentState.GetBoard().getBoardString()[23] == 'r')
+                    if (currentState.GetBoard().goalXposition == 'r' && currentState.GetBoard().goalXposition == 'r') 
                 {
                     Console.WriteLine("Done. Goal reached.");
                     currentState.GetBoard().printBoard();

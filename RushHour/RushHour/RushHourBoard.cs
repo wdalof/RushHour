@@ -16,8 +16,8 @@ namespace RushHour
         List<Vehicle> vehicles = new List<Vehicle>();
         Object goal;
         string clashErrorMessage = "Vehicle clash";
-        int goalXposition;
-        int goalYposition;
+        public int goalXposition;
+        public int goalYposition;
 
         public RushHourBoard()
         {
