@@ -27,20 +27,40 @@ namespace RushHour
             State initialState = new State(initialBoard, null);
             stateQueue.Add(initialState);
 
+            // Keep processing while the queue is not empty.
             while (stateQueue.Count > 0)
             {
-                State currentState = stateQueue[stateQueue.Count - 1];
+                // State we're working on is the first element in the queue.
+                State currentState = stateQueue[0];
 
                 // When the current state is already covered continue with the next state in the queue.
                 if (compare(currentState, visitedStates))
                 {
-                    stateQueue.RemoveAt(stateQueue.Count - 1);
                     continue;
                 }
 
-                // Check if a vehicle can move.
+                // Check for every vehicle on the board if the vehicle can move (in every direction).
                 foreach (Vehicle vehicle in currentState.GetBoard().getVehicleList())
                 {
+                    // If vehicle is the red car, then try to move it to the right.
+                    if (vehicle is RedCar)
+                    {
+                        // Create temponary state.
+                        State temp = cloneState(currentState.GetBoard(), currentState);
+
+                        // Keep moving the red car to the right.
+                        while (temp.GetBoard().moveUp(vehicle))
+                        {
+                            // Check if current state is solution (has red car arrived on exit?).
+                            if (temp.GetBoard().goalXposition == 'r' && temp.GetBoard().goalYposition == 'r')
+                            {
+                                Console.WriteLine("Done. Goal reached.");
+                                temp.GetBoard().printBoard();
+                                break;
+                            }
+                        }
+                    }
+
                     if (vehicle.getDirection() == Vehicle.Direction.HORIZONTAL)
                     {
                         if (currentState.GetBoard().moveDown(vehicle))
@@ -50,6 +70,7 @@ namespace RushHour
                             clone.GetBoard().move(vehicle, -1);
                             clone.GetBoard().printBoard();
 
+                            // Add the new state at the end of the queue for further processing.
                             stateQueue.Add(clone);
                         }
                         if (currentState.GetBoard().moveUp(vehicle))
@@ -82,18 +103,11 @@ namespace RushHour
                     }
                 }
 
-                // Add current (processed) state to the list.
-                visitedStates.Add(currentState);
+                // Remove the element we've just checked from the queue.
+                stateQueue.RemoveAt(0);
 
-                // Check if current state is solution (has red car arrived on exit?).
-                // SUBJECT TO CHANGE.
-                //if (currentState.GetBoard().getBoardString()[23] == 'r')
-                    if (currentState.GetBoard().goalXposition == 'r' && currentState.GetBoard().goalYposition == 'r') 
-                {
-                    Console.WriteLine("Done. Goal reached.");
-                    currentState.GetBoard().printBoard();
-                    break;
-                }
+                // Add current (processed) state to the visited list.
+                visitedStates.Add(currentState);
             }
         }
 
@@ -111,6 +125,7 @@ namespace RushHour
             return false;
         }
 
+        // Helper function to clone a state.
         public State cloneState(RushHourBoard rushHourBoard, State parent)
         {
             return new State(rushHourBoard, parent);
