@@ -33,6 +33,9 @@ namespace RushHour
                 // State we're working on is the first element in the queue.
                 State currentState = stateQueue[0];
 
+                // Remove the element we're checking from the queue.
+                stateQueue.RemoveAt(0);
+
                 // When the current state is already covered continue with the next state in the queue.
                 if (compare(currentState, visitedStates))
                 {
@@ -70,8 +73,11 @@ namespace RushHour
                             clone.GetBoard().move(vehicle, -1);
                             clone.GetBoard().printBoard();
 
-                            // Add the new state at the end of the queue for further processing.
-                            stateQueue.Add(clone);
+                            // Add the new state at the end of the queue for further processing (only if it is not in the queue or visited list).
+                            if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                            {
+                                stateQueue.Add(clone);
+                            }
                         }
                         if (currentState.GetBoard().moveUp(vehicle))
                         {
@@ -79,7 +85,11 @@ namespace RushHour
                             clone.GetBoard().move(vehicle, 1);
                             clone.GetBoard().printBoard();
 
-                            stateQueue.Add(clone);
+                            if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                            {
+                                stateQueue.Add(clone);
+                            }
+
                         }
                     }
                     if (vehicle.getDirection() == Vehicle.Direction.VERTICAL)
@@ -90,7 +100,10 @@ namespace RushHour
                             clone.GetBoard().move(vehicle, -1);
                             clone.GetBoard().printBoard();
 
-                            stateQueue.Add(clone);
+                            if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                            {
+                                stateQueue.Add(clone);
+                            }
                         }
                         if (currentState.GetBoard().moveRight(vehicle))
                         {
@@ -98,14 +111,13 @@ namespace RushHour
                             clone.GetBoard().move(vehicle, 1);
                             clone.GetBoard().printBoard();
 
-                            stateQueue.Add(clone);
+                            if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                            {
+                                stateQueue.Add(clone);
+                            }
                         }
                     }
                 }
-
-                // Remove the element we've just checked from the queue.
-                stateQueue.RemoveAt(0);
-
                 // Add current (processed) state to the visited list.
                 visitedStates.Add(currentState);
             }
