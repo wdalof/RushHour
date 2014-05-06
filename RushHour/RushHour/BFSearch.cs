@@ -51,9 +51,12 @@ namespace RushHour
                         // Create temponary state.
                         State temp = cloneState(currentState.GetBoard(), currentState);
 
-                        // Keep moving the red car to the right.
+                        // Keep trying to move the red car to the right.
                         while (temp.GetBoard().moveUp(vehicle))
                         {
+                            // Move the red car to the right.
+                            // temp.GetBoard().move(vehicle, 1);
+
                             // Check if current state is solution (has red car arrived on exit?).
                             if (temp.GetBoard().goalXposition == 'r' && temp.GetBoard().goalYposition == 'r')
                             {

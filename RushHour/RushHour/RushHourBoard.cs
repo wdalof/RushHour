@@ -242,7 +242,7 @@ namespace RushHour
                         {
                             //Create temponary object to get the name.
                             RedCar tempRedCar = (RedCar)board[i, j];
-                            //Print the name (on the SAME line, Console.Write vs Console.WriteLine).
+                            //Print the name.
                             Console.Write(tempRedCar.getName());
                             //Set object to null for garbage collector.
                             tempRedCar = null;
@@ -266,10 +266,17 @@ namespace RushHour
 
                             continue;
                         }
+
                     }
                     else
                     {
-                        //When there is no car/truck or red car, print "." (on the same line, Console.Write vs Console.WriteLine).
+                        // Show the goal on the board.
+                        if (i == goalXposition && j == goalYposition)
+                        {
+                            Console.Write("@");
+                            continue;
+                        }
+                        //When there is no car/truck or red car, print ".".
                         Console.Write(".");
                     }
                 }
