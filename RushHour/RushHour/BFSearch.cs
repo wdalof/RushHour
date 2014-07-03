@@ -16,6 +16,10 @@ namespace RushHour
 
         private RushHourBoard initialBoard;
 
+        // The state that is currently being processed.
+        private State currentState;
+        private bool solutionFound;
+
         public BFSearch(RushHourBoard initialBoard)
         {
             this.initialBoard = initialBoard;
@@ -28,10 +32,10 @@ namespace RushHour
             stateQueue.Add(initialState);
 
             // Keep processing while the queue is not empty.
-            while (stateQueue.Count > 0)
+            while (stateQueue.Count > 0 && !solutionFound)
             {
                 // State we're working on is the first element in the queue.
-                State currentState = stateQueue[0];
+                currentState = stateQueue[0];
 
                 // Remove the element we're checking from the queue.
                 stateQueue.RemoveAt(0);
@@ -42,87 +46,89 @@ namespace RushHour
                     continue;
                 }
 
+                // Add current (processed) state to the visited list.
+                visitedStates.Add(currentState);
+
                 // Check for every vehicle on the board if the vehicle can move (in every direction).
-                foreach (Vehicle vehicle in currentState.GetBoard().getVehicleList())
+                for (int i = 0; i < currentState.getBoard().getVehicleList().Count(); i++)
                 {
-                    // If vehicle is the red car, then try to move it to the right.
-                    if (vehicle is RedCar)
                     {
-                        // Create temponary state.
-                        State temp = cloneState(currentState.GetBoard(), currentState);
+                        Vehicle vehicle = currentState.getBoard().getVehicleList()[i];
 
-                        // Keep trying to move the red car to the right.
-                        while (temp.GetBoard().moveUp(vehicle))
+                        // If vehicle is the red car, then try to move it to the right.
+                        if (vehicle is RedCar)
                         {
-                            // Move the red car to the right.
-                            // temp.GetBoard().move(vehicle, 1);
-
                             // Check if current state is solution (has red car arrived on exit?).
-                            if (temp.GetBoard().goalXposition == 'r' && temp.GetBoard().goalYposition == 'r')
+                            if (currentState.getBoard().getVehicleList()[i].getX() == currentState.getBoard().goalXposition && currentState.getBoard().getVehicleList()[i].getY() + 1 == currentState.getBoard().goalYposition)
                             {
-                                Console.WriteLine("Done. Goal reached.");
-                                temp.GetBoard().printBoard();
-                                break;
+                                solutionFound = true;
+                                continue;
                             }
                         }
-                    }
 
-                    if (vehicle.getDirection() == Vehicle.Direction.HORIZONTAL)
-                    {
-                        if (currentState.GetBoard().moveDown(vehicle))
+                        if (vehicle.getDirection() == Vehicle.Direction.HORIZONTAL)
                         {
-                            // If vehicle can move, clone the state and move the vehicle.
-                            State clone = cloneState(currentState.GetBoard(), currentState);
-                            clone.GetBoard().move(vehicle, -1);
-                            clone.GetBoard().printBoard();
-
-                            // Add the new state at the end of the queue for further processing (only if it is not in the queue or visited list).
-                            if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                            if (currentState.getBoard().moveDown(vehicle))
                             {
-                                stateQueue.Add(clone);
+                                // If vehicle can move, clone the state and move the vehicle.
+                                State clone = cloneState(currentState.getBoard(), currentState);
+                                clone.getBoard().move(clone.getBoard().getVehicleList()[i], -1);
+
+                                // Add the new state at the end of the queue for further processing (only if it is not in the queue or visited list).
+                                if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                                {
+                                    stateQueue.Add(clone);
+                                }
+
+                            }
+                            if (currentState.getBoard().moveUp(vehicle))
+                            {
+                                State clone = cloneState(currentState.getBoard(), currentState);
+                                clone.getBoard().move(clone.getBoard().getVehicleList()[i], 1);
+
+                                if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                                {
+                                    stateQueue.Add(clone);
+                                }
+
                             }
                         }
-                        if (currentState.GetBoard().moveUp(vehicle))
+                        if (vehicle.getDirection() == Vehicle.Direction.VERTICAL)
                         {
-                            State clone = cloneState(currentState.GetBoard(), currentState);
-                            clone.GetBoard().move(vehicle, 1);
-                            clone.GetBoard().printBoard();
-
-                            if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                            if (currentState.getBoard().moveLeft(vehicle))
                             {
-                                stateQueue.Add(clone);
+                                State clone = cloneState(currentState.getBoard(), currentState);
+                                clone.getBoard().move(clone.getBoard().getVehicleList()[i], -1);
+
+                                if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                                {
+                                    stateQueue.Add(clone);
+                                }
                             }
-
-                        }
-                    }
-                    if (vehicle.getDirection() == Vehicle.Direction.VERTICAL)
-                    {
-                        if (currentState.GetBoard().moveLeft(vehicle))
-                        {
-                            State clone = cloneState(currentState.GetBoard(), currentState);
-                            clone.GetBoard().move(vehicle, -1);
-                            clone.GetBoard().printBoard();
-
-                            if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                            if (currentState.getBoard().moveRight(vehicle))
                             {
-                                stateQueue.Add(clone);
-                            }
-                        }
-                        if (currentState.GetBoard().moveRight(vehicle))
-                        {
-                            State clone = cloneState(currentState.GetBoard(), currentState);
-                            clone.GetBoard().move(vehicle, 1);
-                            clone.GetBoard().printBoard();
+                                State clone = cloneState(currentState.getBoard(), currentState);
+                                clone.getBoard().move(clone.getBoard().getVehicleList()[i], 1);
 
-                            if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
-                            {
-                                stateQueue.Add(clone);
+                                if (!(compare(clone, stateQueue)) && !(compare(clone, visitedStates)))
+                                {
+                                    stateQueue.Add(clone);
+                                }
                             }
                         }
                     }
                 }
-                // Add current (processed) state to the visited list.
-                visitedStates.Add(currentState);
+            }
+            // Shows the solution when it is found.
+            if (solutionFound)
+            {
+                Console.WriteLine("Solution found. Press any key to show the solution (from end to beginning).");
+                Console.ReadKey();
+                showSolution(currentState);
+            }
+            else
+            {
+                Console.WriteLine("Finished. No solution found.");
             }
         }
 
@@ -132,7 +138,7 @@ namespace RushHour
             for (int i = 0; i < list.Count; i++)
             {
                 // If same board is found, return true.
-                if (state.GetBoard().getBoardString() == list[i].GetBoard().getBoardString())
+                if (state.getBoard().getBoardString() == list[i].getBoard().getBoardString())
                 {
                     return true;
                 }
@@ -143,7 +149,43 @@ namespace RushHour
         // Helper function to clone a state.
         public State cloneState(RushHourBoard rushHourBoard, State parent)
         {
-            return new State(rushHourBoard, parent);
+            return new State(rushHourBoard.cloneRushHourBoard(), parent);
+        }
+
+        // Print the solution, beginning with the solution state to the initial state.
+        public void showSolution(State endState)
+        {
+            bool finished = false;
+
+            // Print the current board (the board that is the solution).
+            endState.getBoard().printBoard();
+
+            // Get the first parent state.
+            State parentState = endState.getParent();
+
+            if (parentState != null)
+            {
+                // Print the first parent state board.
+                parentState.getBoard().printBoard();
+
+                // Display all the underlaying parent state boards.
+                while (!finished)
+                {
+                    parentState = parentState.getParent();
+
+                    if (parentState != null)
+                    {
+                        parentState.getBoard().printBoard();
+                    }
+                    else
+                    {
+                        // Stop if we have printed all states (reached the initial state, whose parent state in null).
+                        finished = true;
+                    }
+                }
+
+                Console.WriteLine("Finished printing solution.");
+            }
         }
     }
 }

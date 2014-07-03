@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RushHour
 {
+    // A state is a "snapshot" of a rush hour board with a parent board linked to it.
     class State
     {
         RushHourBoard board;
@@ -17,9 +18,14 @@ namespace RushHour
             this.parent = parent;
         }
 
-        public RushHourBoard GetBoard()
+        public RushHourBoard getBoard()
         {
             return board;
+        }
+
+        public State getParent()
+        {
+            return this.parent;
         }
     }
 }

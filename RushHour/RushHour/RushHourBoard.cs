@@ -14,7 +14,7 @@ namespace RushHour
         private int height;
         Object[,] board;
         List<Vehicle> vehicles = new List<Vehicle>();
-        Object goal;
+        //Object goal;
         string clashErrorMessage = "Vehicle clash";
         public int goalXposition;
         public int goalYposition;
@@ -75,22 +75,22 @@ namespace RushHour
 
             goalXposition = x;
             goalYposition = y;
-            // the goal is represented by a @.
-            goal = '@';
-            // check if the goal location is free
-            if (board[goalXposition, goalXposition] == null)
-            {
-                board[goalXposition, goalYposition] = goal;
-            }
-            else
-                throw new CustomException("The goal position is already taken");
+            //// the goal is represented by a @.
+            //goal = '@';
+            //// check if the goal location is free
+            //if (board[goalXposition, goalXposition] == null)
+            //{
+            //    board[goalXposition, goalYposition] = goal;
+            //}
+            //else
+            //    throw new CustomException("The goal position is already taken");
         }
 
-        // get the goal object 
-        public Object getGoal()
-        {
-            return goal;
-        }
+        //// get the goal object 
+        //public Object getGoal()
+        //{
+        //    return goal;
+        //}
 
         // move a vehicle
         public void move(Vehicle v, int moveDirection)
@@ -151,7 +151,7 @@ namespace RushHour
         {
             try
             {
-                if (board[v.getX(), v.getY() + 1] == null)
+                if (board[v.getX() - 1, v.getY()] == null)
                 {
                     return true;
                 }
@@ -170,8 +170,7 @@ namespace RushHour
         {
             try
             {
-
-                if (board[v.getX(), v.getY() - 1] == null)
+                if (board[v.getX() + v.getLength(), v.getY()] == null)
                 {
                     return true;
                 }
@@ -191,7 +190,7 @@ namespace RushHour
         {
             try
             {
-                if (board[v.getX() - 1, v.getY()] == null)
+                if (board[v.getX(), v.getY() - 1] == null)
                 {
                     return true;
                 }
@@ -211,7 +210,7 @@ namespace RushHour
         {
             try
             {
-                if (board[v.getX() + 1, v.getY()] == null)
+                if (board[v.getX(), v.getY() + v.getLength()] == null)
                 {
                     return true;
                 }
@@ -240,7 +239,7 @@ namespace RushHour
                     {
                         if (board[i, j] is RedCar)
                         {
-                            //Create temponary object to get the name.
+                            //Create temporary object to get the name.
                             RedCar tempRedCar = (RedCar)board[i, j];
                             //Print the name.
                             Console.Write(tempRedCar.getName());
@@ -281,10 +280,11 @@ namespace RushHour
                     }
                 }
 
-                //Print a new line when going to next row.
+                // Print a new line when going to next row.
                 Console.WriteLine();
             }
-            Console.ReadLine();
+            // Print a blank line after the board.
+            Console.WriteLine();
         }
 
         //print rushhour board method as a 6 x 6 matrix
@@ -361,6 +361,34 @@ namespace RushHour
         public List<Vehicle> getVehicleList()
         {
             return this.vehicles;
+        }
+
+        //Create clone of the board.
+        public RushHourBoard cloneRushHourBoard()
+        {
+            RushHourBoard clone = new RushHourBoard();
+            clone.initBoard();
+
+            foreach (Vehicle vehicle in this.vehicles)
+            {
+                if (vehicle is RedCar)
+                {
+                    clone.add(new RedCar(vehicle.getX(), vehicle.getY(), vehicle.getDirection()));
+                    continue;
+                }
+                if (vehicle is Truck)
+                {
+                    clone.add(new Truck(vehicle.getX(), vehicle.getY(), vehicle.getDirection(), vehicle.getName()));
+                    continue;
+                }
+                if (vehicle is Car)
+                {
+                    clone.add(new Car(vehicle.getX(), vehicle.getY(), vehicle.getDirection(), vehicle.getName()));
+                    continue;
+                }
+            }
+
+            return clone;
         }
     }
 }

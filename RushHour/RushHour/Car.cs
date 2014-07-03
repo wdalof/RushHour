@@ -11,11 +11,10 @@ namespace RushHour
         public static int length = 2;
 
 
-
-        public Car(int x, int y, Vehicle.Direction direction)
-            : base(x, y, length, direction)
-        {
-        }
+        //public Car(int x, int y, Vehicle.Direction direction)
+        //    : base(x, y, length, direction)
+        //{
+        //}
 
         public Car(int x, int y, Vehicle.Direction direction, char c)
             : base(x, y, length, direction, c)

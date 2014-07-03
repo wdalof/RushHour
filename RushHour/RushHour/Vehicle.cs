@@ -8,7 +8,8 @@ namespace RushHour
 {
     public abstract class Vehicle
     {
-        public static char vehicle_name = 'a';
+        //public static char vehicle_name = 'a';
+        public static char vehicle_name;
 
         private int x;
         private int y;
@@ -21,15 +22,15 @@ namespace RushHour
         {
             HORIZONTAL, VERTICAL
         }
-        //constructor
-        public Vehicle(int x, int y, int length, Direction dir)
-        {
-            this.x = x;
-            this.y = y;
-            this.length = length;
-            this.direction = dir;
-            this.name = vehicle_name++;
-        }
+        ////constructor
+        //public Vehicle(int x, int y, int length, Direction dir)
+        //{
+        //    this.x = x;
+        //    this.y = y;
+        //    this.length = length;
+        //    this.direction = dir;
+        //    this.name = vehicle_name++;
+        //}
         // constructor
         public Vehicle(int x, int y, int length, Direction dir, char c)
         {

@@ -11,9 +11,9 @@ namespace RushHour
 
         static void Main(string[] args)
         {
-            Car c = new Car(3, 4, Vehicle.Direction.HORIZONTAL);
+            Car c = new Car(3, 1, Vehicle.Direction.HORIZONTAL, 'c');
             RedCar rc = new RedCar(3, 2, Vehicle.Direction.VERTICAL);
-            Truck t = new Truck(0, 1, Vehicle.Direction.VERTICAL);
+            Truck t = new Truck(1, 4, Vehicle.Direction.HORIZONTAL, 't');
 
             RushHourBoard board = new RushHourBoard();
             board.add(c);
@@ -23,11 +23,14 @@ namespace RushHour
             Console.WriteLine("Initial board:");
             board.printBoard();
 
-            Console.Write("Solution:");
+            Console.WriteLine("Press any key to start searching for a solution (using breadth-first search).");
+            Console.ReadKey();
+
+            Console.WriteLine();
             BFSearch bfSearch = new BFSearch(board);
             bfSearch.solve();
 
-            Console.WriteLine("Finished.");
+            Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
     }
